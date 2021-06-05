@@ -1,6 +1,9 @@
 package me.alien.meksifi.mek;
 
+import net.minecraftforge.common.util.NonNullFunction;
 import net.minecraftforge.energy.IEnergyStorage;
+
+import javax.annotation.Nonnull;
 
 public class Energy implements IEnergyStorage {
 
@@ -9,7 +12,10 @@ public class Energy implements IEnergyStorage {
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
-        return maxEnergy-energy;
+        if(simulate) return energy+maxReceive>maxEnergy ? maxEnergy : maxReceive;;
+        int tmp = 0;
+        energy += energy+maxReceive>maxEnergy ? maxEnergy : maxReceive;
+        return Math.min(maxReceive, maxEnergy);
     }
 
     @Override
