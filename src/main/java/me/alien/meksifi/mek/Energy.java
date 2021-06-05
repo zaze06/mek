@@ -8,11 +8,12 @@ import javax.annotation.Nonnull;
 public class Energy implements IEnergyStorage {
 
     public final int maxEnergy = 100;
-    public int energy = 0;
+    public int energy;
 
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate) {
-        if(simulate) return energy+maxReceive>maxEnergy ? maxEnergy : maxReceive;;
+        System.out.println(energy+"/"+maxEnergy);
+        if(simulate) return energy+maxReceive>maxEnergy ? maxEnergy : maxReceive;
         int tmp = 0;
         energy += energy+maxReceive>maxEnergy ? maxEnergy : maxReceive;
         return Math.min(maxReceive, maxEnergy);
@@ -20,16 +21,19 @@ public class Energy implements IEnergyStorage {
 
     @Override
     public int extractEnergy(int maxExtract, boolean simulate) {
+        System.out.println(energy+"/"+maxEnergy);
         return energy;
     }
 
     @Override
     public int getEnergyStored() {
+        System.out.println(energy+"/"+maxEnergy);
         return energy;
     }
 
     @Override
     public int getMaxEnergyStored() {
+        System.out.println(energy+"/"+maxEnergy);
         return maxEnergy;
     }
 
